@@ -2,8 +2,6 @@ import re
 import emoji
 import unidecode
 from underthesea import word_tokenize
-from pyvi import ViTokenizer
-from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
 
 # ==== 1. Loại bỏ emoji ====
 def remove_emoji(text):
@@ -31,13 +29,33 @@ def normalize_whitespace(text):
     return re.sub(r'\s+', ' ', text).strip()
 
 # ==== 7. Tổng hợp pipeline xử lý ====
-def preprocess_text(text, stopwords):
-    text = text.lower()
-    text = remove_emoji(text)
-    text = normalize_unicode(text)
-    text = remove_punctuation_and_number(text)
-    text = normalize_whitespace(text)
-    text = tokenize_vietnamese(text)
-    text = remove_stopwords(text, stopwords)
-    text = normalize_whitespace(text)
+def preprocess_text(text, 
+    stopwords_set=None, 
+    lowercase_flag=True, 
+    remove_emoji_flag=True,
+    normalize_unicode_flag=True,
+    remove_punctuation_and_number_flag=True,
+    tokenize_vietnamese_flag=True,
+    remove_stopwords_flag=True):
+    
+    if stopwords_set is None:
+        with open('stopwords.txt', encoding='utf-8') as f:
+            stopwords = set(line.strip() for line in f if line.strip())
+    else:
+        stopwords = stopwords_set
+
+    if lowercase_flag:
+        text = text.lower()
+    if remove_emoji_flag:
+        text = remove_emoji(text)
+    if normalize_unicode_flag:
+        text = normalize_unicode(text)
+    if remove_punctuation_and_number_flag:
+        text = remove_punctuation_and_number(text)
+    if tokenize_vietnamese_flag:
+        text = normalize_whitespace(text)
+        text = tokenize_vietnamese(text)
+    if remove_stopwords_flag:
+        text = remove_stopwords(text, stopwords)
+        text = normalize_whitespace(text)
     return text

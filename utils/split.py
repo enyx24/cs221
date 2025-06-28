@@ -5,6 +5,8 @@ df = pd.read_csv("data/merged.csv")
 
 print(df["new_label"].value_counts())
 
+df.dropna(inplace=True)
+
 train_df, temp_df = train_test_split(df, test_size=0.3, random_state=42, stratify=df['new_label'])
 val_df, test_df = train_test_split(temp_df, test_size=2/3, random_state=42, stratify=temp_df['new_label'])
 
