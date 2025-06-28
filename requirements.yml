@@ -1,0 +1,31 @@
+name: nlp_gpu_env
+channels:
+  - nvidia
+  - pytorch
+  - defaults
+dependencies:
+  - python=3.9
+  - pip
+  - cudatoolkit=11.8
+  - pytorch=2.5.1
+  - torchvision=0.20.1
+  - torchaudio=2.5.1
+  - pytorch-cuda=11.8
+  - numpy
+  - pandas
+  - scikit-learn
+  - matplotlib
+  - seaborn
+  - tqdm
+  - jinja2
+  - pip:
+      - underthesea
+      - pyvi
+      - unidecode
+      - emoji
+      - transformers
+      - datasets
+      - evaluate
+      - nltk
+      - pytorch-lightning
+      - tensorboard
