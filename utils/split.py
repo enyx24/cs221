@@ -14,7 +14,7 @@ print(train_df["new_label"].value_counts())
 print(test_df["new_label"].value_counts())
 print(val_df["new_label"].value_counts())
 
-train_df.to_csv("data/train.csv", index=False)
-val_df.to_csv("data/val.csv", index=False)
-test_df.to_csv("data/test.csv", index=False)
+train_df.to_csv("data/full/train.csv", index=False)
+val_df.to_csv("data/full/val.csv", index=False)
+test_df.to_csv("data/full/test.csv", index=False)
 

@@ -56,7 +56,7 @@ test_loader = DataLoader(SentimentDataset(test_df), batch_size=BATCH_SIZE)
 optimizer = AdamW(model.parameters(), lr=LEARNING_RATE)
 
 best_f1 = 0.0
-weights = torch.tensor([1.0, 5.2]).to(device)
+weights = torch.tensor([1.0, 2.0]).to(device)
 loss_fn = CrossEntropyLoss(weight=weights)
 for epoch in range(EPOCHS):
     print(f"\nEpoch {epoch+1}/{EPOCHS}")
@@ -67,6 +67,7 @@ for epoch in range(EPOCHS):
     for batch in loop:
         batch = {k: v.to(device) for k, v in batch.items()}
         outputs = model(**batch)
+        logits = outputs.logits
         loss = loss_fn(logits, batch["labels"]) 
         loss.backward()
         optimizer.step()
